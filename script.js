@@ -41,6 +41,7 @@ function openSubCategory(categoryName) {
     channels.forEach(chan => {
         const card = document.createElement('div');
         card.className = 'card-item';
+        // تمرير الروابط والنصوص كمتغيرات نصية صريحة لضمان قراءتها
         card.onclick = () => startExoPlayer(chan.name, chan.url);
         card.innerHTML = `
             <div class="card-thumb purple-thumb">beIN SPORTS</div>
@@ -57,23 +58,28 @@ function goBack() {
     switchScreen('home', document.querySelector('.nav-item'));
 }
 
-// تشغيل القناة عبر مشغل ExoPlayer الأصلي بدون ميزات الـ Cast المسببة للانهيار
-async function startExoPlayer(title, url) {
+// تشغيل القناة وإرسال الرابط مباشرة لـ ExoPlayer المدمج
+async function startExoPlayer(videoTitle, videoUrl) {
+    if (!videoUrl) {
+        alert("الرابط غير موجود!");
+        return;
+    }
+    
     try {
         if (window.Capacitor && window.Capacitor.Plugins.CapacitorVideoPlayer) {
+            const player = window.Capacitor.Plugins.CapacitorVideoPlayer;
             
-            // تهيئة وتجهيز المشغل الأصلي للأندرويد
-            await window.Capacitor.Plugins.CapacitorVideoPlayer.initPlayer({
+            // استدعاء مباشر لتهيئة وتشغيل الفيديو الأصلي
+            await player.initPlayer({
                 mode: "fullscreen",
-                url: url,
-                title: title,
-                playerId: "exo-player-id",
+                url: videoUrl,
+                title: videoTitle,
+                playerId: "fullscreen-video-player",
                 componentTag: "div",
-                chromecast: false // 🛠️ تعطيل ميزة الكاست لمنع الانهيار نهائياً
+                chromecast: false
             });
-
         } else {
-            alert("مشغل ExoPlayer الأصلي جاهز وسيعمل فور تثبيت الـ APK على الهاتف.");
+            alert("مشغل ExoPlayer سيعمل فور تثبيت نسخة الـ APK الجديدة.");
         }
     } catch (error) {
         console.error("ExoPlayer Error:", error);
