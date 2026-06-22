@@ -3,9 +3,9 @@ const channelsData = {
         { name: "beIN SPORTS MAX 1", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246118.m3u8" },
         { name: "beIN SPORTS MAX 2", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246119.m3u8" },
         { name: "beIN SPORTS MAX 3", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246120.m3u8" },
-        { name: "beIN SPORTS MAX 4", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246121.m3u8" },
+        { name: "beIN SPORTS MAX 6", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246123.m3u8" },
         { name: "beIN SPORTS MAX 5", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246122.m3u8" },
-        { name: "beIN SPORTS MAX 6", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246123.m3u8" }
+        { name: "beIN SPORTS MAX 4", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246121.m3u8" }
     ],
     "beIN 4K": [
         { name: "beIN SPORTS MAX 4K HDR", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246124.m3u8" }
@@ -14,6 +14,8 @@ const channelsData = {
         { name: "beIN SPORTS 1 HD", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246118.m3u8" }
     ]
 };
+
+let hlsInstance = null;
 
 function switchScreen(screenId, element) {
     closeNetflixVideo();
@@ -63,16 +65,34 @@ function startNetflixStream(title, url) {
     const videoElement = document.getElementById('netflix-video-element');
 
     document.getElementById('player-active-title').innerText = title;
-    videoElement.src = url;
-    playerOverlay.style.display = 'flex'; /* تم إصلاح الخطأ الإملائي هنا */
+    playerOverlay.style.display = 'flex';
 
-    videoElement.load();
-    videoElement.play().catch(err => console.log(err));
+    if (Hls.isSupported()) {
+        if (hlsInstance) {
+            hlsInstance.destroy();
+        }
+        hlsInstance = new Hls();
+        hlsInstance.loadSource(url);
+        hlsInstance.attachMedia(videoElement);
+        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
+            videoElement.play();
+        });
+    } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+        videoElement.src = url;
+        videoElement.addEventListener('loadedmetadata', function() {
+            videoElement.play();
+        });
+    }
 }
 
 function closeNetflixVideo() {
     const playerOverlay = document.getElementById('netflix-fullscreen-player');
     const videoElement = document.getElementById('netflix-video-element');
+
+    if (hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+    }
 
     if(videoElement) {
         videoElement.pause();

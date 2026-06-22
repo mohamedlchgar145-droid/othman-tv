@@ -6,6 +6,7 @@
     <title>OHTMAN TV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
@@ -27,8 +28,6 @@
     </div>
 
     <main class="content-area">
-
-        <!-- شاشة الرئيسية المطابقة تماماً لكروت الباشا تي في -->
         <section id="screen-home" class="app-screen active">
             <div class="grid-container">
                 <div class="card-item" onclick="openSubCategory('beIN MAX')">
@@ -55,30 +54,12 @@
                     <div class="card-thumb purple-thumb">beIN SPORTS</div>
                     <div class="card-name">beIN SD</div>
                 </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">osn</div>
-                    <div class="card-name">OSN</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">mbc</div>
-                    <div class="card-name">MBC</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.8rem;">MATCHES</div>
-                    <div class="card-name">MATCHES</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.9rem;">NETFLIX</div>
-                    <div class="card-name">NETFLIX</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.9rem;">News</div>
-                    <div class="card-name">NEWS</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#3b82f6; font-size:1.2rem;">Kids</div>
-                    <div class="card-name">KIDS</div>
-                </div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">osn</div><div class="card-name">OSN</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">mbc</div><div class="card-name">MBC</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.8rem;">MATCHES</div><div class="card-name">MATCHES</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.9rem;">NETFLIX</div><div class="card-name">NETFLIX</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.9rem;">News</div><div class="card-name">NEWS</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#3b82f6; font-size:1.2rem;">Kids</div><div class="card-name">KIDS</div></div>
             </div>
         </section>
 
@@ -86,19 +67,14 @@
             <div class="grid-container" id="sub-channels-grid"></div>
         </section>
 
-        <!-- شاشة الباقات والأعلام الدائرية كالباشا تي في تماماً -->
         <section id="screen-categories" class="app-screen">
             <div class="grid-container">
                 <div class="card-item-flag"><div class="flag-circle">🇲🇦</div><div class="card-name">MOROCCO</div></div>
                 <div class="card-item-flag"><div class="flag-circle">🇪🇬</div><div class="card-name">EGYPT</div></div>
                 <div class="card-item-flag"><div class="flag-circle">🇸🇦</div><div class="card-name">SAUDI</div></div>
-                <div class="card-item-flag"><div class="flag-circle">🇶🇦</div><div class="card-name">QATAR</div></div>
-                <div class="card-item-flag"><div class="flag-circle">🇦🇪</div><div class="card-name">UNITED</div></div>
-                <div class="card-item-flag"><div class="flag-circle">🇧🇭</div><div class="card-name">BAHRAIN</div></div>
             </div>
         </section>
 
-        <!-- شاشة الأفلام بدون نصوص عشوائية وبنفس التقسيم الاحترافي -->
         <section id="screen-movies" class="app-screen">
             <div class="sub-tabs">
                 <button class="sub-tab-btn active">الأفلام</button>
@@ -109,58 +85,25 @@
                     <div class="movie-poster">أفلام<br>نتفلكس</div>
                     <div class="movie-title">افلام EN نتفلكس</div>
                 </div>
-                <div class="movie-card">
-                    <div class="movie-poster">أفلام<br>أكشن</div>
-                    <div class="movie-title">افلام اكشن EN</div>
-                </div>
-                <div class="movie-card">
-                    <div class="movie-poster">أفلام<br>إنجليزي</div>
-                    <div class="movie-title">اتلجليزي EN 2025 مترجم</div>
-                </div>
             </div>
         </section>
 
-        <!-- شاشة جدول المباريات بتوقيت مكة والفرق والأعلام الجانبية -->
         <section id="screen-matches" class="app-screen">
             <div class="matches-container">
                 <div class="match-row">
                     <div class="team"><span class="flag">🇦🇷</span> الأرجنتين</div>
-                    <div class="match-info">
-                        <span class="m-time">بتوقيت مكة</span>
-                        <span class="m-status live">مباشر</span>
-                    </div>
+                    <div class="match-info"><span class="m-time">بتوقيت مكة</span><span class="m-status live">مباشر</span></div>
                     <div class="team">النمسا <span class="flag">🇦🇹</span></div>
-                </div>
-                <div class="match-row">
-                    <div class="team"><span class="flag">🇮🇶</span> العراق</div>
-                    <div class="match-info">
-                        <span class="m-time">بتوقيت مكة</span>
-                        <span class="m-status time-badge">12:00 AM</span>
-                    </div>
-                    <div class="team">فرنسا <span class="flag">🇫🇷</span></div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchScreen('home', this)">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </button>
-        <button class="nav-item" onclick="switchScreen('categories', this)">
-            <i class="fas fa-th-large"></i>
-            <span>الباقات</span>
-        </button>
-        <button class="nav-item" onclick="switchScreen('movies', this)">
-            <i class="fas fa-film"></i>
-            <span>الأفلام</span>
-        </button>
-        <button class="nav-item" onclick="switchScreen('matches', this)">
-            <i class="fas fa-calendar-alt"></i>
-            <span>المباريات</span>
-        </button>
+        <button class="nav-item active" onclick="switchScreen('home', this)"><i class="fas fa-home"></i><span>الرئيسية</span></button>
+        <button class="nav-item" onclick="switchScreen('categories', this)"><i class="fas fa-th-large"></i><span>الباقات</span></button>
+        <button class="nav-item" onclick="switchScreen('movies', this)"><i class="fas fa-film"></i><span>الأفلام</span></button>
+        <button class="nav-item" onclick="switchScreen('matches', this)"><i class="fas fa-calendar-alt"></i><span>المباريات</span></button>
     </nav>
 
     <script src="script.js"></script>
