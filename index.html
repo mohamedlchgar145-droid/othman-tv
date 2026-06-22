@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق البث التفاعلي - بث مباشر</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">📺 تفاعل TV</div>
+        <nav>
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#">تصفح</a>
+            <a href="#">المشاهدة اللاحقة</a>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        
+        <section class="video-section">
+            <div class="video-player-container">
+                <video id="live-video" controls autoplay muted>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+                <span class="live-badge">مباشر 🔴</span>
+            </div>
+            <div class="stream-info">
+                <h1 class="stream-title">بث تجريبي تفاعلي - تطوير تطبيقات الويب</h1>
+                <p class="streamer-name">بواسطة: عثمان للمعلوميات</p>
+            </div>
+        </section>
+
+        <aside class="chat-section">
+            <div class="chat-header">الدردشة الحية 💬</div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message"><strong>أحمد:</strong> السلام عليكم! بالتوفيق.</div>
+                <div class="message"><strong>سارة:</strong> واجهة رائعة جداً 👍</div>
+                <div class="message"><strong>خالد:</strong> هل البث مسجل؟</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا...">
+                <button id="send-btn">إرسال</button>
+            </div>
+        </aside>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

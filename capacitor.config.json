@@ -1,0 +1,6 @@
+{
+  "appId": "com.othmantv.app",
+  "appName": "OhtmanTV",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,178 @@
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f0f15;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* شريط التنقل */
+.navbar {
+    background-color: #1a1a24;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2a2a3a;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #9146ff;
+}
+
+.navbar nav a {
+    color: #adadb8;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover, .navbar nav a.active {
+    color: #9146ff;
+}
+
+/* الحاوية الرئيسية */
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* قسم الفيديو */
+.video-section {
+    flex: 3;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #14141c;
+}
+
+.video-player-container {
+    position: relative;
+    width: 100%;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.video-player-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.live-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #eb0400;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.stream-info {
+    padding: 10px 5px;
+}
+
+.stream-title {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.streamer-name {
+    color: #adadb8;
+    font-size: 0.95rem;
+}
+
+/* قسم الدردشة */
+.chat-section {
+    flex: 1;
+    min-width: 300px;
+    background-color: #1a1a24;
+    border-right: 1px solid #2a2a3a;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #2a2a3a;
+    text-align: center;
+    background-color: #1e1e2c;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    background-color: #252538;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.message strong {
+    color: #a970ff;
+    margin-left: 5px;
+}
+
+.chat-input-area {
+    padding: 15px;
+    border-top: 1px solid #2a2a3a;
+    display: flex;
+    gap: 10px;
+    background-color: #1e1e2c;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #3a3a50;
+    border-radius: 4px;
+    background-color: #0f0f15;
+    color: white;
+    outline: none;
+}
+
+.chat-input-area input:focus {
+    border-color: #9146ff;
+}
+
+.chat-input-area button {
+    background-color: #9146ff;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.chat-input-area button:hover {
+    background-color: #772ce8;
+}
