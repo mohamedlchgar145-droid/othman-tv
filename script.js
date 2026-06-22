@@ -1,14 +1,17 @@
 const channelsData = {
     "beIN MAX": [
-        { name: "beIN MAX 1 HD", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
-        { name: "beIN MAX 2 HD", url: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4" },
-        { name: "beIN MAX 3 HD", url: "https://www.w3schools.com/html/movie.mp4" }
+        { name: "beIN SPORTS MAX 1", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246118.m3u8" },
+        { name: "beIN SPORTS MAX 2", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246119.m3u8" },
+        { name: "beIN SPORTS MAX 3", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246120.m3u8" },
+        { name: "beIN SPORTS MAX 4", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246121.m3u8" },
+        { name: "beIN SPORTS MAX 5", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246122.m3u8" },
+        { name: "beIN SPORTS MAX 6", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246123.m3u8" }
     ],
     "beIN 4K": [
-        { name: "beIN SPORTS 4K", url: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4" }
+        { name: "beIN SPORTS MAX 4K HDR", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246124.m3u8" }
     ],
     "beIN HD": [
-        { name: "beIN SPORTS 1 HD", url: "https://www.w3schools.com/html/movie.mp4" }
+        { name: "beIN SPORTS 1 HD", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246118.m3u8" }
     ]
 };
 
@@ -20,7 +23,7 @@ function switchScreen(screenId, element) {
 
     document.querySelectorAll('.app-screen').forEach(screen => screen.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-    
+
     document.getElementById('screen-' + screenId).classList.add('active');
     if(element) element.classList.add('active');
 }
@@ -34,7 +37,7 @@ function openSubCategory(categoryName) {
     document.getElementById('back-btn').style.display = 'flex';
 
     const grid = document.getElementById('sub-channels-grid');
-    grid.innerHTML = ''; 
+    grid.innerHTML = '';
 
     channels.forEach(chan => {
         const card = document.createElement('div');
@@ -58,11 +61,11 @@ function goBack() {
 function startNetflixStream(title, url) {
     const playerOverlay = document.getElementById('netflix-fullscreen-player');
     const videoElement = document.getElementById('netflix-video-element');
-    
+
     document.getElementById('player-active-title').innerText = title;
     videoElement.src = url;
-    playerOverlay.style.display = 'flex';
-    
+    playerOverlay.style.style.display = 'flex';
+
     videoElement.load();
     videoElement.play().catch(err => console.log(err));
 }
@@ -70,7 +73,7 @@ function startNetflixStream(title, url) {
 function closeNetflixVideo() {
     const playerOverlay = document.getElementById('netflix-fullscreen-player');
     const videoElement = document.getElementById('netflix-video-element');
-    
+
     if(videoElement) {
         videoElement.pause();
         videoElement.src = "";
