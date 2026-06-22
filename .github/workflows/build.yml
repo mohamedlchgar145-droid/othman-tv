@@ -30,9 +30,16 @@ jobs:
         npm install
         npm install @capacitor/core @capacitor/cli @capacitor/android
 
+    - name: Prepare Web Directory
+      run: |
+        mkdir -p www
+        cp index.html www/
+        cp style.css www/
+        cp script.js www/
+
     - name: Initialize Capacitor Configuration
       run: |
-        npx cap init "OHTMAN TV" "com.othmantv.app" --web-dir=.
+        npx cap init "OHTMAN TV" "com.othmantv.app" --web-dir=www
 
     - name: Add Android Platform
       run: |
