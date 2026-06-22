@@ -6,7 +6,7 @@
     <title>OHTMAN TV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js"></script>
 </head>
 <body>
 
@@ -17,13 +17,13 @@
         <button class="header-btn"><i class="fas fa-search"></i></button>
     </header>
 
-    <div id="netflix-fullscreen-player" class="fullscreen-player-overlay">
+    <div id="netflix-fullscreen-player" class="fullscreen-player-overlay" style="display: none !important;">
         <div class="player-controls-header">
             <button class="player-close-btn" onclick="closeNetflixVideo()"><i class="fas fa-arrow-right"></i></button>
             <span id="player-active-title" class="player-stream-title">اسم القناة</span>
         </div>
         <div class="video-fullscreen-wrapper">
-            <video id="netflix-video-element" controls autoplay playsinline></video>
+            <video id="netflix-video-element" controls autoplay playsinline webkit-playsinline></video>
         </div>
     </div>
 
@@ -42,18 +42,9 @@
                     <div class="card-thumb purple-thumb">beIN SPORTS</div>
                     <div class="card-name">beIN HD</div>
                 </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#ef4444;">WORLD SPORT</div>
-                    <div class="card-name">WORLD SPORT</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb b-thumb" style="color:#3b82f6;"><i class="fas fa-soccer-ball"></i> ARAB SPORT</div>
-                    <div class="card-name">ARBA SPORT</div>
-                </div>
-                <div class="card-item">
-                    <div class="card-thumb purple-thumb">beIN SPORTS</div>
-                    <div class="card-name">beIN SD</div>
-                </div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444;">WORLD SPORT</div><div class="card-name">WORLD SPORT</div></div>
+                <div class="card-item"><div class="card-thumb b-thumb" style="color:#3b82f6;"><i class="fas fa-soccer-ball"></i> ARAB SPORT</div><div class="card-name">ARBA SPORT</div></div>
+                <div class="card-item"><div class="card-thumb purple-thumb">beIN SPORTS</div><div class="card-name">beIN SD</div></div>
                 <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">osn</div><div class="card-name">OSN</div></div>
                 <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:1.2rem;">mbc</div><div class="card-name">MBC</div></div>
                 <div class="card-item"><div class="card-thumb b-thumb" style="color:#ef4444; font-size:0.8rem;">MATCHES</div><div class="card-name">MATCHES</div></div>

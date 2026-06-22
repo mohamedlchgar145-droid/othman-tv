@@ -3,9 +3,9 @@ const channelsData = {
         { name: "beIN SPORTS MAX 1", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246118.m3u8" },
         { name: "beIN SPORTS MAX 2", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246119.m3u8" },
         { name: "beIN SPORTS MAX 3", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246120.m3u8" },
-        { name: "beIN SPORTS MAX 6", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246123.m3u8" },
+        { name: "beIN SPORTS MAX 4", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246121.m3u8" },
         { name: "beIN SPORTS MAX 5", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246122.m3u8" },
-        { name: "beIN SPORTS MAX 4", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246121.m3u8" }
+        { name: "beIN SPORTS MAX 6", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246123.m3u8" }
     ],
     "beIN 4K": [
         { name: "beIN SPORTS MAX 4K HDR", url: "http://asmrasmr.live:8080/live/39495727290/01928238338/1246124.m3u8" }
@@ -65,22 +65,40 @@ function startNetflixStream(title, url) {
     const videoElement = document.getElementById('netflix-video-element');
 
     document.getElementById('player-active-title').innerText = title;
-    playerOverlay.style.display = 'flex';
+    playerOverlay.style.setProperty('display', 'flex', 'important');
 
     if (Hls.isSupported()) {
         if (hlsInstance) {
             hlsInstance.destroy();
         }
-        hlsInstance = new Hls();
+        hlsInstance = new Hls({
+            maxMaxBufferLength: 10
+        });
         hlsInstance.loadSource(url);
         hlsInstance.attachMedia(videoElement);
         hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
-            videoElement.play();
+            videoElement.play().catch(err => console.log("Play failed", err));
+        });
+        
+        hlsInstance.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+                switch (data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        hlsInstance.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        hlsInstance.recoverMediaError();
+                        break;
+                    default:
+                        closeNetflixVideo();
+                        break;
+                }
+            }
         });
     } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
         videoElement.src = url;
         videoElement.addEventListener('loadedmetadata', function() {
-            videoElement.play();
+            videoElement.play().catch(err => console.log(err));
         });
     }
 }
@@ -97,6 +115,7 @@ function closeNetflixVideo() {
     if(videoElement) {
         videoElement.pause();
         videoElement.src = "";
+        videoElement.load();
     }
-    playerOverlay.style.display = 'none';
+    playerOverlay.style.setProperty('display', 'none', 'important');
 }
