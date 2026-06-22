@@ -15,10 +15,7 @@ const channelsData = {
     ]
 };
 
-let hlsInstance = null;
-
 function switchScreen(screenId, element) {
-    closeNetflixVideo();
     document.getElementById('back-btn').style.display = 'none';
     document.getElementById('menu-btn').style.display = 'flex';
     document.getElementById('main-app-title').innerText = "OHTMAN TV";
@@ -44,7 +41,7 @@ function openSubCategory(categoryName) {
     channels.forEach(chan => {
         const card = document.createElement('div');
         card.className = 'card-item';
-        card.onclick = () => startNetflixStream(chan.name, chan.url);
+        card.onclick = () => startNativePlayer(chan.name, chan.url);
         card.innerHTML = `
             <div class="card-thumb purple-thumb">beIN SPORTS</div>
             <div class="card-name">${chan.name}</div>
@@ -60,54 +57,21 @@ function goBack() {
     switchScreen('home', document.querySelector('.nav-item'));
 }
 
-function startNetflixStream(title, url) {
-    const playerOverlay = document.getElementById('netflix-fullscreen-player');
-    const videoElement = document.getElementById('netflix-video-element');
-
-    document.getElementById('player-active-title').innerText = title;
-    playerOverlay.style.setProperty('display', 'flex', 'important');
-
-    // إذا كان الرابط ينتهي بـ .ts أو يحتوي عليه، نقوم بتشغيله مباشرة عبر المتصفح
-    if (url.includes('.ts')) {
-        if (hlsInstance) {
-            hlsInstance.destroy();
-            hlsInstance = null;
-        }
-        videoElement.src = url;
-        videoElement.load();
-        videoElement.play().catch(err => console.log("Direct TS play failed", err));
-    } else {
-        // تشغيل روابط m3u8 عبر مكتبة HLS
-        if (Hls.isSupported()) {
-            if (hlsInstance) hlsInstance.destroy();
-            hlsInstance = new Hls({ maxMaxBufferLength: 10 });
-            hlsInstance.loadSource(url);
-            hlsInstance.attachMedia(videoElement);
-            hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
-                videoElement.play().catch(err => console.log(err));
+// استدعاء مشغل ExoPlayer الأصلي بملء الشاشة
+async function startNativePlayer(title, url) {
+    try {
+        if (window.Capacitor && window.Capacitor.Plugins.CapacitorVideoPlayer) {
+            await window.Capacitor.Plugins.CapacitorVideoPlayer.initPlayer({
+                mode: "fullscreen",
+                url: url,
+                title: title,
+                playerId: "fullscreen-player",
+                componentTag: "div"
             });
-        } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-            videoElement.src = url;
-            videoElement.addEventListener('loadedmetadata', function() {
-                videoElement.play().catch(err => console.log(err));
-            });
+        } else {
+            alert("سيعمل مشغل ExoPlayer فور انتهاء بناء الـ APK وتثبيته على هاتفك.");
         }
+    } catch (error) {
+        console.error("Error opening Native Player", error);
     }
-}
-
-function closeNetflixVideo() {
-    const playerOverlay = document.getElementById('netflix-fullscreen-player');
-    const videoElement = document.getElementById('netflix-video-element');
-
-    if (hlsInstance) {
-        hlsInstance.destroy();
-        hlsInstance = null;
-    }
-
-    if(videoElement) {
-        videoElement.pause();
-        videoElement.src = "";
-        videoElement.load();
-    }
-    playerOverlay.style.setProperty('display', 'none', 'important');
 }
