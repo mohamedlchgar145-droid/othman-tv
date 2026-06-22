@@ -2,51 +2,112 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق البث التفاعلي - بث مباشر</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>OHTMAN TV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo">📺 تفاعل TV</div>
-        <nav>
-            <a href="#" class="active">الرئيسية</a>
-            <a href="#">تصفح</a>
-            <a href="#">المشاهدة اللاحقة</a>
-        </nav>
+    <header class="app-header" id="main-header">
+        <button class="header-btn" id="back-btn" onclick="goBack()" style="display: none;"><i class="fas fa-arrow-right"></i></button>
+        <button class="header-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+        <div class="app-title" id="main-app-title">OHTMAN TV</div>
+        <button class="header-btn"><i class="fas fa-search"></i></button>
     </header>
 
-    <main class="main-container">
-        
-        <section class="video-section">
-            <div class="video-player-container">
-                <video id="live-video" controls autoplay muted>
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    متصفحك لا يدعم تشغيل الفيديو.
-                </video>
-                <span class="live-badge">مباشر 🔴</span>
-            </div>
-            <div class="stream-info">
-                <h1 class="stream-title">بث تجريبي تفاعلي - تطوير تطبيقات الويب</h1>
-                <p class="streamer-name">بواسطة: عثمان للمعلوميات</p>
+    <div id="netflix-fullscreen-player" class="fullscreen-player-overlay">
+        <div class="player-controls-header">
+            <button class="player-close-btn" onclick="closeNetflixVideo()"><i class="fas fa-arrow-right"></i></button>
+            <span id="player-active-title" class="player-stream-title">اسم الفيلم أو القناة</span>
+        </div>
+        <div class="video-fullscreen-wrapper">
+            <video id="netflix-video-element" controls autoplay playsinline></video>
+        </div>
+    </div>
+
+    <main class="content-area">
+
+        <section id="screen-home" class="app-screen active">
+            <div class="grid-container">
+                <div class="card-item" onclick="openSubCategory('beIN MAX')">
+                    <div class="card-thumb purple-thumb">beIN SPORTS</div>
+                    <div class="card-name">beIN MAX</div>
+                </div>
+                <div class="card-item" onclick="openSubCategory('beIN 4K')">
+                    <div class="card-thumb purple-thumb">beIN SPORTS</div>
+                    <div class="card-name">beIN 4K</div>
+                </div>
+                <div class="card-item" onclick="openSubCategory('beIN HD')">
+                    <div class="card-thumb purple-thumb">beIN SPORTS</div>
+                    <div class="card-name">beIN HD</div>
+                </div>
             </div>
         </section>
 
-        <aside class="chat-section">
-            <div class="chat-header">الدردشة الحية 💬</div>
-            <div class="chat-messages" id="chat-messages">
-                <div class="message"><strong>أحمد:</strong> السلام عليكم! بالتوفيق.</div>
-                <div class="message"><strong>سارة:</strong> واجهة رائعة جداً 👍</div>
-                <div class="message"><strong>خالد:</strong> هل البث مسجل؟</div>
+        <section id="screen-sub-channels" class="app-screen">
+            <div class="grid-container" id="sub-channels-grid"></div>
+        </section>
+
+        <section id="screen-categories" class="app-screen">
+            <div class="grid-container">
+                <div class="card-item"><div class="card-flag">🇲🇦</div><div class="card-name">MOROCCO</div></div>
+                <div class="card-item"><div class="card-flag">🇪🇬</div><div class="card-name">EGYPT</div></div>
+                <div class="card-item"><div class="card-flag">🇸🇦</div><div class="card-name">SAUDI</div></div>
             </div>
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا...">
-                <button id="send-btn">إرسال</button>
+        </section>
+
+        <section id="screen-movies" class="app-screen">
+            <div class="sub-tabs">
+                <button class="sub-tab-btn active">الأفلام</button>
+                <button class="sub-tab-btn">المسلسلات</button>
             </div>
-        </aside>
+            <div class="movies-grid">
+                <div class="movie-card" onclick="startNetflixStream('افلام EN نتفلكس', 'https://www.w3schools.com/html/mov_bbb.mp4')">
+                    <div class="movie-poster">أفلام<br><span>نتفلكس</span></div>
+                    <div class="movie-title">افلام EN نتفلكس</div>
+                </div>
+                <div class="movie-card" onclick="startNetflixStream('افلام اكشن EN', 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4')">
+                    <div class="movie-poster">أفلام<br><span>أكشن</span></div>
+                    <div class="movie-title">افلام اكشن EN</div>
+                </div>
+                <div class="movie-card" onclick="startNetflixStream('انجليزي EN 2025', 'https://www.w3schools.com/html/movie.mp4')">
+                    <div class="movie-poster">أفلام<br><span>إنجليزي</span></div>
+                    <div class="movie-title">انجليزي EN 2025 مترجم</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="screen-matches" class="app-screen">
+            <div class="matches-container">
+                <div class="match-card">
+                    <div class="team-info"><span>الأرجنتين</span></div>
+                    <div class="match-time live-match">مباشر</div>
+                    <div class="team-info"><span>النمسا</span></div>
+                </div>
+            </div>
+        </section>
 
     </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchScreen('home', this)">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </button>
+        <button class="nav-item" onclick="switchScreen('categories', this)">
+            <i class="fas fa-th-large"></i>
+            <span>الباقات</span>
+        </button>
+        <button class="nav-item" onclick="switchScreen('movies', this)">
+            <i class="fas fa-film"></i>
+            <span>الأفلام</span>
+        </button>
+        <button class="nav-item" onclick="switchScreen('matches', this)">
+            <i class="fas fa-calendar-alt"></i>
+            <span>المباريات</span>
+        </button>
+    </nav>
 
     <script src="script.js"></script>
 </body>
