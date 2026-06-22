@@ -1,3 +1,4 @@
+/* إعادة التصميم الداكن الأصلي الأنيق لعثمان */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +8,7 @@
 }
 
 body {
-    background-color: #111111;
+    background-color: #0d0d12; /* خلفية داكنة فخمة من اختيارك الأصلي */
     color: #ffffff;
     min-height: 100vh;
     display: flex;
@@ -16,7 +17,7 @@ body {
 }
 
 .app-header {
-    background-color: #1a1a1a;
+    background-color: #161622;
     height: 60px;
     display: flex;
     justify-content: space-between;
@@ -27,19 +28,20 @@ body {
     left: 0;
     width: 100%;
     z-index: 100;
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid #232335;
 }
 
 .app-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .header-btn {
     background: none;
     border: none;
-    color: #ffffff;
+    color: #a0aec0;
     font-size: 1.2rem;
     cursor: pointer;
     width: 40px;
@@ -47,13 +49,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.2s;
+}
+
+.header-btn:active {
+    color: #ffffff;
 }
 
 .content-area {
     flex: 1;
     margin-top: 60px;
     margin-bottom: 70px;
-    padding: 12px;
+    padding: 14px;
 }
 
 .app-screen {
@@ -64,12 +71,63 @@ body {
     display: block;
 }
 
+/* تنسيق شبكة الكروت الأصلي */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
 
+.card-item {
+    background-color: #161622;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    aspect-ratio: 1 / 1;
+    padding: 10px;
+    border: 1px solid #232335;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.card-item:active {
+    transform: scale(0.96);
+}
+
+.purple-thumb {
+    background: linear-gradient(135deg, #6366f1, #4f46e5); 
+    color: #ffffff;
+    width: 100%;
+    flex: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-flag {
+    font-size: 2rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-name {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* تنسيق شبكة الأفلام بالبوسترات الطولية العمودية الفخمة */
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -77,20 +135,20 @@ body {
 }
 
 .movie-card {
-    background-color: #1a1a1a;
-    border-radius: 8px;
+    background-color: #161622;
+    border-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid #262626;
+    border: 1px solid #232335;
     cursor: pointer;
 }
 
 .movie-poster {
     width: 100%;
     aspect-ratio: 2 / 3;
-    background-color: #000000;
-    color: #e50914;
+    background: linear-gradient(180deg, #1f1f2e, #11111a);
+    color: #ef4444;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,75 +157,39 @@ body {
     font-weight: bold;
     text-align: center;
     padding: 8px;
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid #232335;
 }
 
 .movie-poster span {
     font-size: 0.75rem;
-    color: #a3a3a3;
+    color: #94a3b8;
     margin-top: 4px;
 }
 
 .movie-title {
-    padding: 6px;
+    padding: 8px 4px;
     font-size: 0.75rem;
-    color: #e5e5e5;
+    color: #f1f5f9;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.card-item {
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    aspect-ratio: 1 / 1;
-    padding: 8px;
-    border: 1px solid #262626;
-    cursor: pointer;
-}
-
-.purple-thumb {
-    background: linear-gradient(135deg, #4c1d95, #2563eb); 
-    color: #ffffff;
-    width: 100%;
-    flex: 1;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: bold;
-    font-style: italic;
-}
-
-.card-name {
-    margin-top: 6px;
-    font-size: 0.75rem;
-    color: #e5e5e5;
-    text-align: center;
-    width: 100%;
-}
-
 .sub-tabs {
     display: flex;
-    background-color: #1a1a1a;
+    background-color: #161622;
     border-radius: 8px;
     padding: 4px;
     margin-bottom: 16px;
-    border: 1px solid #262626;
+    border: 1px solid #232335;
 }
 
 .sub-tab-btn {
     flex: 1;
     background: none;
     border: none;
-    color: #a3a3a3;
+    color: #94a3b8;
     padding: 8px 0;
     font-size: 0.9rem;
     font-weight: bold;
@@ -176,14 +198,15 @@ body {
 }
 
 .sub-tab-btn.active {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #6366f1;
+    color: #ffffff;
 }
 
 .matches-container { display: flex; flex-direction: column; gap: 12px; }
-.match-card { background-color: #1a1a1a; border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #262626; }
-.match-time.live-match { background-color: #dc2626; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; }
+.match-card { background-color: #161622; border-radius: 12px; padding: 16px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #232335; }
+.match-time.live-match { background-color: #ef4444; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; }
 
+/* مشغل فيديو ملء الشاشة بتصميم ممتاز */
 .fullscreen-player-overlay {
     position: fixed;
     top: 0;
@@ -202,7 +225,7 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0));
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -230,7 +253,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
 }
 
 #netflix-video-element {
@@ -239,24 +261,25 @@ body {
     object-fit: contain;
 }
 
+/* القائمة السفلية الأصلية المريحة بألوان متناسقة مع الهوية */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 65px;
-    background-color: #1a1a1a;
+    background-color: #161622;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-top: 1px solid #262626;
+    border-top: 1px solid #232335;
     z-index: 100;
 }
 
 .nav-item {
     background: none;
     border: none;
-    color: #737373;
+    color: #64748b;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -268,5 +291,5 @@ body {
 }
 
 .nav-item i { font-size: 1.2rem; }
-.nav-item span { font-size: 0.7rem; font-weight: bold; }
-.nav-item.active { color: #ec4899; }
+.nav-item span { font-size: 0.75rem; font-weight: bold; }
+.nav-item.active { color: #6366f1; } /* اللون البنفسجي الأصلي الجميل لقائمتك */
