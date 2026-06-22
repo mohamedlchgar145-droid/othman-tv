@@ -64,7 +64,7 @@ function startNetflixStream(title, url) {
 
     document.getElementById('player-active-title').innerText = title;
     videoElement.src = url;
-    playerOverlay.style.style.display = 'flex';
+    playerOverlay.style.display = 'flex'; /* تم إصلاح الخطأ الإملائي هنا */
 
     videoElement.load();
     videoElement.play().catch(err => console.log(err));
